@@ -1,0 +1,2 @@
+# BishopBlog
+ The bishop blog
