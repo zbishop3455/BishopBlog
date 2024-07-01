@@ -1,0 +1,88 @@
+baseURL: https://zacharybishop.com/
+languageCode: en-us
+title: BishopBlog
+paginate: 5
+theme: ["PaperMod"]
+
+menu:
+  main:
+    - identifier: categorices
+      name: Posts
+      url: /posts/
+      weight: 1
+    - identifier: about
+      name: About
+      url: /about/
+      weight: 3
+    - identifier: categories
+      name: Categories
+      url: /categories/
+      weight: 2
+
+params:
+  defaultTheme: dark
+  disableThemeToggle: false
+  defaultTheme: dark
+  # defaultTheme: auto # to switch between dark or light according to browser theme
+  description: "ExampleSite description"
+  keywords: [Blog, Portfolio]
+  author: Zachary Bishop
+  DateFormat: "January 2, 2006"
+
+
+  cover:
+    linkFullImages: true
+
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: false
+  # ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+  # UseHugoToc: true
+  # disableSpecial1stPost: false
+  # disableScrollToTop: false
+  # comments: false
+  # hidemeta: false
+  # hideSummary: false
+  # showtoc: false
+  # tocopen: false
+
+  # profile-mode
+  profileMode:
+    enabled: true # needs to be explicitly set
+    title: Welcome
+    subtitle: "This is my place all things work, life, and adventure."
+    imageUrl: "pics/me2.JPG"
+    imageWidth: 1000
+    imageHeight: 500
+    buttons:
+      - name: Posts
+        url: posts
+      - name: About
+        url: about
+
+  socialIcons:
+    - name: github
+      title: github
+      url: "https://github.com/zbishop3455"
+    - name: linkedin
+      title: linkedin
+      url: "https://www.linkedin.com/in/zachary-bishop-17b6a0161/"
+    - name: instagram
+      title: Instagram
+      url: "https://www.instagram.com/zmanbi/"
+    - name: Facebook
+      title: Facebook
+      url: "https://www.facebook.com/zach.bishop3"
+
+
+enableInlineShortcodes: true
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+enableEmoji: true
+pygmentsUseClasses: true
+# mainsections: ["posts", "papermod"]
