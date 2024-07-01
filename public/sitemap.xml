@@ -2,21 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://zacharybishop.com/</loc>
     <lastmod>2024-06-30T19:24:05-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://zacharybishop.com/categories/</loc>
     <lastmod>2024-06-30T19:24:05-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/first-post/</loc>
+    <loc>https://zacharybishop.com/posts/first-post/</loc>
     <lastmod>2024-06-30T19:24:05-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://zacharybishop.com/posts/</loc>
     <lastmod>2024-06-30T19:24:05-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/tech/</loc>
+    <loc>https://zacharybishop.com/categories/tech/</loc>
     <lastmod>2024-06-30T19:24:05-04:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://zacharybishop.com/tags/</loc>
   </url>
 </urlset>
