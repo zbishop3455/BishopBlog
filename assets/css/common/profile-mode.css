@@ -18,8 +18,16 @@
 }
 
 .profile img {
+    resize: both;
     border-radius: 5%;
     border: 1px black solid;
+    width: 600px;
+    height: 600px;
+
+    @media only screen and (max-width: 768px) {
+        width: 300px;
+        height: 300px;
+    }
 }
 
 .buttons {
