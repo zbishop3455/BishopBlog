@@ -31,7 +31,6 @@ params:
 
 
   cover:
-    responsiveImages: true
     linkFullImages: true
 
   ShowReadingTime: true
