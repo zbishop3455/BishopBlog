@@ -1,6 +1,6 @@
 baseURL: https://zacharybishop.com/
 languageCode: en-us
-title: BishopBlog
+title: Zachary Bishop
 paginate: 5
 theme: ["PaperMod"]
 
@@ -48,6 +48,9 @@ params:
   # hideSummary: false
   # showtoc: false
   # tocopen: false
+
+  assets:
+    favicon: "img/favicon.ico"
 
   # profile-mode
   profileMode:
