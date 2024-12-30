@@ -57,7 +57,7 @@ params:
     enabled: true # needs to be explicitly set
     title: Welcome
     subtitle: "This is my place all things work, life, and adventure."
-    imageUrl: "img/me.JPG"
+    imageUrl: "img/me2.JPG"
     imageWidth: 1000
     imageHeight: 1000
     buttons:
