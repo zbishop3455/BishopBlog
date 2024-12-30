@@ -2,7 +2,7 @@
 title: "How We Got Here"
 date: 2024-06-30T19:24:05-04:00
 draft: false
-categories: ["tech"]
+categories: ["personal"]
 cover:
   image: "img/me1.JPG"
   alt: "test"
