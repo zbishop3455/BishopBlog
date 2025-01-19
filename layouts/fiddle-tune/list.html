@@ -64,6 +64,8 @@
 {{- end }}
 
 <article class="{{ $class }}">
+
+
   {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
   {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
   <header class="entry-header">
@@ -80,15 +82,11 @@
     </h2>
   </header>
   {{- if (ne (.Param "hideSummary") true) }}
+
   <div class="entry-content">
-    <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+    <p>{{ .Params.song_key }}</p>
   </div>
-  {{- end }}
-  {{- if not (.Param "hideMeta") }}
-  CUSTOM
-  <!-- <footer class="entry-footer">
-    {{- partial "post_meta.html" . -}}
-  </footer> -->
+
   {{- end }}
   <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
 </article>

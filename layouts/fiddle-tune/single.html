@@ -1,5 +1,17 @@
 {{- define "main" }}
 
+
+<script>
+  const songData = {{ .Params.song_data }};
+
+  // const variables = {{ .Params.song_data | jsonify }};
+
+
+</script>
+
+<script src="{{ "js/fiddle-tune.js" | relURL }}"></script>
+
+
 <article class="post-single">
   <header class="post-header">
     {{ partial "breadcrumbs.html" . }}
@@ -30,7 +42,9 @@
   </header>
 
   <strong>Song Key</strong> {{ .Params.song_key }}
-  <!-- {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}
+
+
+  {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}
   {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" $isHidden) }}
   {{- if (.Param "ShowToc") }}
   {{- partial "toc.html" . }}
@@ -38,11 +52,13 @@
 
   {{- if .Content }}
   <div class="post-content">
-    {{- if not (.Param "disableAnchoredHeadings") }}
-    {{- partial "anchored_headings.html" .Content -}}
-    {{- else }}{{ .Content }}{{ end }}
+   {{ .Content }}
   </div>
-  {{- end }} -->
+  {{- end }}
+
+  <!-- Custom fiddle tune rendeing! -->
+  <div id="fiddle-tune-container">
+  </div>
 
   <footer class="post-footer">
     {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
