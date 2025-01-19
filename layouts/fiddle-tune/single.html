@@ -1,22 +1,20 @@
 {{- define "main" }}
 
 
+<!-- Mount song data from the markdown file to the javascript of this page! -->
 <script>
-  const songData = {{ .Params.song_data }};
-
-  // const variables = {{ .Params.song_data | jsonify }};
-
-
+  const songData = {{ .Params.songData }};
 </script>
 
 <script src="{{ "js/fiddle-tune.js" | relURL }}"></script>
-
+<link rel="stylesheet" href="{{ "css/fiddle-tune.css" | relURL }}" />
 
 <article class="post-single">
   <header class="post-header">
     {{ partial "breadcrumbs.html" . }}
     <h1 class="post-title entry-hint-parent">
       {{ .Title }}
+
       {{- if .Draft }}
       <span class="entry-hint" title="Draft">
         <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
@@ -25,12 +23,15 @@
         </svg>
       </span>
       {{- end }}
+
     </h1>
+
     {{- if .Description }}
     <div class="post-description">
       {{ .Description }}
     </div>
     {{- end }}
+
     {{- if not (.Param "hideMeta") }}
     <div class="post-meta">
       {{- partial "post_meta.html" . -}}
@@ -41,14 +42,18 @@
     {{- end }}
   </header>
 
-  <strong>Song Key</strong> {{ .Params.song_key }}
+  <span>
+    <strong>Song Keys: </strong>{{ .Params.songKeys }}
+  </span>
+  
 
 
-  {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}
+
+  <!-- {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}
   {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" $isHidden) }}
   {{- if (.Param "ShowToc") }}
   {{- partial "toc.html" . }}
-  {{- end }}
+  {{- end }} -->
 
   {{- if .Content }}
   <div class="post-content">
@@ -56,7 +61,7 @@
   </div>
   {{- end }}
 
-  <!-- Custom fiddle tune rendeing! -->
+  <!-- Custom chord chart rendeing! -->
   <div id="fiddle-tune-container">
   </div>
 
@@ -67,9 +72,11 @@
       <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
       {{- end }}
     </ul>
+
     {{- if (.Param "ShowPostNavLinks") }}
     {{- partial "post_nav_links.html" . }}
     {{- end }}
+
     {{- if (and site.Params.ShowShareButtons (ne .Params.disableShare true)) }}
     {{- partial "share_icons.html" . -}}
     {{- end }}

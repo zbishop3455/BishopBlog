@@ -1,0 +1,39 @@
+
+
+/* #fiddle-tune-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+} */
+
+
+.song-part-header-container {
+    border-bottom: 1px solid rgb(235, 235, 235);
+}
+
+.song-part {
+    margin-top: 20px;
+}
+
+/* Horizontal line of chords. */
+.song-line {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 10px;
+}
+
+/* The individual chord of the line */
+.song-chord-container {
+    width: 100%;
+    text-align: center;
+}
+
+.song-chord {
+    font-size: 1.5em;
+    font-weight: bold;
+}

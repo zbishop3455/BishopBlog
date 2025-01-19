@@ -1,10 +1,12 @@
 ---
+hideMeta: true
 title: "Old Yeller Dog"
-description: "Old Yeller Dog"
 type: fiddle-tune
 layout: single
-song_key: "G / A Major"
-song_data:
+songKeys:
+    - 'A'
+    - 'G'
+songData:
     part_a:
         name: "Part A"
         lines:
@@ -16,4 +18,3 @@ song_data:
             line_1: ['I','IV','I','I','I','I','IV','IV']
             line_2: ['I','IV','I','I','I','V','I','I']
 ---
-

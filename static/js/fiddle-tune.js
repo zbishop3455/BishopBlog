@@ -9,14 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // Div for the chord chart
     var container = document.getElementById("fiddle-tune-container");
 
-    // List of song parts
     // A song part has a display name and a list of lines of chords
     var songParts = [];
 
     for (key in songData) {
         songParts.push(songData[key]);
     }
-
 
     // for each songPart lets create a div with the name and a row for each line of chords
     // most songs will just have an A and B part
@@ -25,13 +23,17 @@ document.addEventListener("DOMContentLoaded", () => {
         var songPartDiv = document.createElement("div");
         songPartDiv.className = "song-part";
 
+        var songPartHeaderContainer = document.createElement("div");
+        songPartHeaderContainer.className = "song-part-header-container";
+        songPartDiv.appendChild(songPartHeaderContainer);
+
         var songPartName = document.createElement("h3");
         songPartName.innerHTML = songPart.name;
-        songPartDiv.appendChild(songPartName);
+        songPartHeaderContainer.appendChild(songPartName);
 
         // Create a div for the lines of chords
         var lineContainer = document.createElement("div");
-        lineContainer.className = "line-container";
+        lineContainer.className = "song-line-container";
 
         // Extract lines from the song part
         var lines = [];
@@ -45,17 +47,22 @@ document.addEventListener("DOMContentLoaded", () => {
         for (var j = 0; j < lines.length; j++) {
             var line = lines[j];
             var lineSpan = document.createElement("span");
-            lineSpan.className = "line";
+            lineSpan.className = "song-line";
+            lineContainer.appendChild(lineSpan);
 
             // For each chord in the line, create a div with the chord name
             for (var k = 0; k < line.length; k++) {
+                var chordContainer = document.createElement("span");
+                chordContainer.className = "song-chord-container";
+                lineSpan.appendChild(chordContainer);
+
                 var chord = document.createElement("p");
-                chord.className = "chord";
+                chord.className = "song-chord";
                 chord.innerHTML = line[k];
-                lineSpan.appendChild(chord);
+                chordContainer.appendChild(chord);
             }
 
-            lineContainer.appendChild(lineSpan);
+
         }
 
         songPartDiv.appendChild(lineContainer);
