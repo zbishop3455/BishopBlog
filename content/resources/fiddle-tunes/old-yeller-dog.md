@@ -7,12 +7,12 @@ songKeys:
     - 'A'
     - 'G'
 songData:
-    part_a:
+    a-part:
         name: "Part A"
         lines:
             line_1: ['I','I','I','I','V','V','I','I']
             line_2: ['I','I','I','I','V','I','I','I']
-    part_b:
+    b-part:
         name: "Part B"
         lines:
             line_1: ['I','IV','I','I','I','I','IV','IV']
