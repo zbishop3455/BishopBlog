@@ -45,7 +45,7 @@
   <span>
     <strong>Song Keys: </strong>{{ .Params.songKeys }}
   </span>
-  
+
 
 
 
@@ -55,15 +55,18 @@
   {{- partial "toc.html" . }}
   {{- end }} -->
 
+  <!-- Custom chord chart gets rendered in here -->
+  <div id="fiddle-tune-container">
+  </div>
+
+  <!-- <hr> -->
+
   {{- if .Content }}
   <div class="post-content">
    {{ .Content }}
   </div>
   {{- end }}
 
-  <!-- Custom chord chart rendeing! -->
-  <div id="fiddle-tune-container">
-  </div>
 
   <footer class="post-footer">
     {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}

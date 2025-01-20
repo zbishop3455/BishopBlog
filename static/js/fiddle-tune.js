@@ -3,15 +3,12 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // songData is being passed in from the template
-    // songKey is being passed in from the template
+    // songData & songKey are already defined in the template
 
-    // Div for the chord chart
     var container = document.getElementById("fiddle-tune-container");
 
     // A song part has a display name and a list of lines of chords
     var songParts = [];
-
     for (key in songData) {
         songParts.push(songData[key]);
     }
@@ -31,19 +28,15 @@ document.addEventListener("DOMContentLoaded", () => {
         songPartName.innerHTML = songPart.name;
         songPartHeaderContainer.appendChild(songPartName);
 
-        // Create a div for the lines of chords
+        // Each part of the song has a list of "lines"
         var lineContainer = document.createElement("div");
         lineContainer.className = "song-line-container";
-
-        // Extract lines from the song part
         var lines = [];
         for (key in songPart.lines) {
             lines.push(songPart.lines[key]);
         }
 
-        console.log(lines);
 
-        // For each line of chords
         for (var j = 0; j < lines.length; j++) {
             var line = lines[j];
             var lineSpan = document.createElement("span");

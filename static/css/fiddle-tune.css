@@ -1,30 +1,34 @@
 
 
-/* #fiddle-tune-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-} */
+#fiddle-tune-container {
 
-
-.song-part-header-container {
-    border-bottom: 1px solid rgb(235, 235, 235);
 }
 
 .song-part {
-    margin-top: 20px;
+    margin-top: 30px;
+}
+
+.song-line-container {
+    margin-top: 10px;
 }
 
 /* Horizontal line of chords. */
 .song-line {
-    margin-top: 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin: 0 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.song-chord-container:nth-child(4n) {
+    border-right: 1px solid rgb(235, 235, 235);
+}
+
+.song-chord-container:first-child {
+    border-left: 1px solid rgb(235, 235, 235);
 }
 
 /* The individual chord of the line */
