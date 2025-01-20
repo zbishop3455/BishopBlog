@@ -3,20 +3,38 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // songData & songKey are already defined in the template
+    var songKeyDropdown = document.getElementById("chart-key-select");
 
+    // handle song key change
+    songKeyDropdown.addEventListener("change", function() {
+        renderCordChart(songKeyDropdown.value);
+    });
+
+    renderCordChart(songKeyDropdown.value);
+  });
+
+
+
+function renderCordChart(songKey) {
+
+    // Clear the container
     var container = document.getElementById("fiddle-tune-container");
+    container.innerHTML = "";
 
-    // A song part has a display name and a list of lines of chords
-    var songParts = [];
-    for (key in songData) {
-        songParts.push(songData[key]);
+    // copy the song data
+    var song = JSON.parse(JSON.stringify(songData));
+
+    // Translate the song data to the selected key
+    // We always start with the Nashville key and then transpose to the selected key
+    // Previous states are not saved
+    if (songKey !== "Nashville") {
+        alert("Transposing to key of " + songKey);
+        transposeSong(song, songKey);
     }
 
-    // for each songPart lets create a div with the name and a row for each line of chords
-    // most songs will just have an A and B part
-    for (var i = 0; i < songParts.length; i++) {
-        var songPart = songParts[i];
+    // For each part of the song (e.g. A-part or B-part) we draw the chords by line
+    for (partId in song) {
+        var songPart = song[partId];
         var songPartDiv = document.createElement("div");
         songPartDiv.className = "song-part";
 
@@ -28,22 +46,17 @@ document.addEventListener("DOMContentLoaded", () => {
         songPartName.innerHTML = songPart.name;
         songPartHeaderContainer.appendChild(songPartName);
 
-        // Each part of the song has a list of "lines"
         var lineContainer = document.createElement("div");
         lineContainer.className = "song-line-container";
-        var lines = [];
-        for (key in songPart.lines) {
-            lines.push(songPart.lines[key]);
-        }
 
-
-        for (var j = 0; j < lines.length; j++) {
-            var line = lines[j];
+        // Create the lines
+        for (lineId in songPart.lines) {
+            var line = songPart.lines[lineId];
             var lineSpan = document.createElement("span");
             lineSpan.className = "song-line";
             lineContainer.appendChild(lineSpan);
 
-            // For each chord in the line, create a div with the chord name
+            // Create the chords 
             for (var k = 0; k < line.length; k++) {
                 var chordContainer = document.createElement("span");
                 chordContainer.className = "song-chord-container";
@@ -54,14 +67,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 chord.innerHTML = line[k];
                 chordContainer.appendChild(chord);
             }
-
-
         }
 
         songPartDiv.appendChild(lineContainer);
         container.appendChild(songPartDiv);
     }
-    
-  });
+}
 
 
+
+function transposeSong(song, songKey) {
+    for (partId in song) {
+        var songPart = song[partId];
+        for (lineId in songPart.lines) {
+            var line = songPart.lines[lineId];
+            for (var k = 0; k < line.length; k++) {
+                line[k] = "A";
+            }
+        }
+    }
+}
