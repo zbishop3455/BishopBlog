@@ -4,6 +4,7 @@
 <!-- Mount song data from the markdown file to the javascript of this page! -->
 <script>
   const songData = {{ .Params.songData }};
+  const songKeys = {{ .Params.songKeys }};
 </script>
 
 <script src="{{ "js/fiddle-tune.js" | relURL }}"></script>
@@ -11,6 +12,7 @@
 
 <article class="post-single">
   <header class="post-header">
+
     {{ partial "breadcrumbs.html" . }}
     <h1 class="post-title entry-hint-parent">
       {{ .Title }}
@@ -42,18 +44,28 @@
     {{- end }}
   </header>
 
-  <span>
-    <strong>Song Keys: </strong>{{ .Params.songKeys }}
-  </span>
+
+  <div id="chord-meta">
+    
+    <div class="chord-meta-item">
+      <strong>Song Keys: </strong>
+      {{ range .Params.songKeys }}
+      <div class="song-key">{{ . }}</div>
+      {{ end }}
+    </div>
+
+    <div class="chord-meta-item"> 
+      <strong>Chart Key: </strong>
+      <select id="chart-select">
+        <option>Nashville</option>
+        {{ range .Params.songKeys }}
+        <option>{{ . }}</option>
+        {{ end }}
+      </select>
+    </div>
+  </div>
 
 
-
-
-  <!-- {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}
-  {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" $isHidden) }}
-  {{- if (.Param "ShowToc") }}
-  {{- partial "toc.html" . }}
-  {{- end }} -->
 
   <!-- Custom chord chart gets rendered in here -->
   <div id="fiddle-tune-container">
