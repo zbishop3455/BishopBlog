@@ -10,13 +10,13 @@ songData:
     a-part:
         name: "Part A - (2x)"
         lines:
-            line_1: ['I','I','I','I','V','V','I','I']
-            line_2: ['I','I','I','I','V','V','I','I']
+            line_1: ['I','I','I','I','V7','V7','I','I']
+            line_2: ['I','I','I','I','V7','V7','I','I']
     b-part:
         name: "Part B - (2x)"
         lines:
             line_1: ['I','IV','I','I','I','I','IV','IV']
-            line_2: ['I','IV','I','I','I','V','I','I']
+            line_2: ['I','IV','I','I','I','V7','I','I']
 ---
 
 ---
