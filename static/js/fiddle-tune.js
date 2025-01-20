@@ -27,7 +27,6 @@ function renderCordChart(songKey) {
     // We always start with the roman numerals and then transpose to the selected key
     // Previous states are not saved
     if (songKey !== "Roman") {
-        alert("Transposing to key of " + songKey);
         transposeSong(song, songKey);
     }
 
@@ -72,6 +71,10 @@ function renderCordChart(songKey) {
         container.appendChild(songPartDiv);
     }
 }
+
+// All Notes - this is for easily applying sharps and flats
+const allNotesSharp = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
+const allNotesFlat = ["A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab"];
 
 // Map of keys to their chord root notes
 const keyMap = {
@@ -122,17 +125,20 @@ function transposeSong(song, songKey) {
                 }
 
                 // Pop the stack to get the roman numeral and chord quality
+                var sharpOrFlat = "";
                 var romanNumber = "";
                 var chordQuality = "";
 
 
                 while (stack.length > 0) {
                     var c = stack.pop();
-                    if (romanNumeralsChars.includes(c)) {
+
+                    if (c === "#" || c === "b") {
+                        sharpOrFlat = c;
+                    } else if (romanNumeralsChars.includes(c)) {
                         romanNumber += c;
                     } else {
-                        chordQuality = c;
-                        break;
+                        chordQuality += c;
                     }
                 }
 

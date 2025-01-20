@@ -84,7 +84,10 @@
   {{- if (ne (.Param "hideSummary") true) }}
 
   <div class="entry-content">
-    <p>{{ .Params.song_key }}</p>
+    <strong>Keys:</strong>
+      {{- range .Params.songKeys }}
+      <b>{{ . }}</b>
+      {{- end }}
   </div>
 
   {{- end }}
