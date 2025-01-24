@@ -23,12 +23,9 @@ function renderCordChart(songKey) {
     // copy the song data
     var song = JSON.parse(JSON.stringify(songData));
 
-    // Translate the song data to the selected key
-    // We always start with the roman numerals and then transpose to the selected key
-    // Previous states are not saved
-    if (songKey !== "Roman") {
-        transposeSong(song, songKey);
-    }
+    // Parses the song data and transposes it to the selected key if needed.
+    // Converts roman numerals into display-ready html
+    processSong(song, songKey);
 
     // For each part of the song (e.g. A-part or B-part) we draw the chords by line
     for (partId in song) {
@@ -101,71 +98,105 @@ const romanNumeralMap = {
 }
 
 
-function transposeSong(song, songKey) {
-
-    const keyRoots = keyMap[songKey];
-
-    if (!keyRoots) {
-        alert("Key not supported: " + songKey);
-        return
-    }
-
+function processSong(song, songKey) {
 
     for (partId in song) {
         var songPart = song[partId];
         for (lineId in songPart.lines) {
             var line = songPart.lines[lineId];
             for (var k = 0; k < line.length; k++) {
-                var chordValue = line[k];
-                
-                // Push the entire chordValue onto a stack in reverse order
-                var stack = [];
-                for (var i = chordValue.length - 1; i >= 0; i--) {
-                    stack.push(chordValue[i]);
+
+                const chord = new Chord(line[k]);
+
+                if (songKey !== "Roman") {
+                    chord.transpose(songKey);
                 }
 
-                // Pop the stack to get the roman numeral and chord quality
-                var sharpOrFlat = "";
-                var romanNumber = "";
-                var chordQuality = "";
-
-
-                while (stack.length > 0) {
-                    var c = stack.pop();
-
-                    if (c === "#" || c === "b") {
-                        sharpOrFlat = c;
-                    } else if (romanNumeralsChars.includes(c)) {
-                        romanNumber += c;
-                    } else {
-                        chordQuality += c;
-                    }
-                }
-
-                // Note if the chord is major or minor
-                var isMinor = romanNumber === romanNumber.toLocaleLowerCase();
-
-                // Translate the roman numeral to the scale degree
-                var scaleDegree = romanNumeralMap[romanNumber.toUpperCase()];
-                if (!scaleDegree) {
-                    alert("Could not map chord to scale degree: " + chordValue);
-                    return
-                }
-
-                // Translate the scale degree to the new key
-                var newRoot = keyRoots[scaleDegree - 1];
-
-                // Construct the new chord value
-                var newChordValue = newRoot;
-                if (isMinor) {
-                    newChordValue += "m";
-                }
-                newChordValue += chordQuality;
-
-                // Replace the chord value in the line
-                line[k] = newChordValue;
+                line[k] = chord.getDisplayText();
             }
         }
     }
 }
 
+class Chord {
+
+    constructor(romanNumeralExpr) {
+        this.romanNumeralExpr = romanNumeralExpr;
+
+        // Parse the roman numeral into its components
+        this.parseRomanNumeral();
+    }
+
+    parseRomanNumeral() {
+
+        // Push the entire chordValue onto a stack in reverse order
+        var stack = [];
+        for (var i = this.romanNumeralExpr.length - 1; i >= 0; i--) {
+            stack.push(this.romanNumeralExpr[i]);
+        }
+
+        // Pop the stack to get the roman numeral and chord quality
+        this.sharpOrFlat = "";
+        this.chordRoot = "";
+        this.chordQuality = "";
+
+        while (stack.length > 0) {
+            var c = stack.pop();
+
+            if (c === "#" || c === "b") {
+                this.sharpOrFlat = c;
+            } else if (romanNumeralsChars.includes(c)) {
+                this.chordRoot += c;
+            } else {
+                this.chordQuality += c;
+            }
+        }
+
+        // minor chords are all lowercase
+        this.isMinor = this.chordRoot === this.chordRoot.toLocaleLowerCase();
+
+        // Translate the roman numeral to the scale degree integer
+        this.scaleDegree = romanNumeralMap[this.chordRoot.toUpperCase()];
+
+        if (!this.scaleDegree) {
+            alert("Could not map chord to scale degree: " + this.chordRoot);
+            return
+        }
+
+    }
+
+    transpose(key) {
+        
+        this.isTransposed = true;
+
+        // Transpose from roman numeral to actual chord value
+        var keyRoots = keyMap[key];
+
+        if (!keyRoots) {
+            alert("Unsupported Key: " + key);
+            return;
+        }
+
+        // Translate the scale degree to the new key
+        var newRoot = keyRoots[this.scaleDegree - 1];
+
+        this.chordRoot = newRoot;
+    }
+
+    getDisplayText() {
+
+        if (! this.isTransposed) {
+            return this.chordRoot + "<sup>" + this.chordQuality + "</sup>";
+        }
+
+        // Todo: add support for sharp and flat chords
+        var s = this.chordRoot;
+        if (this.isMinor) {
+            s += "m";
+        }
+        s += "<sup>" + this.chordQuality + "</sup>";
+
+        return s;
+    }
+
+}
