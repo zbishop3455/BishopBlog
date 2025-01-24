@@ -85,6 +85,7 @@ params:
       title: Facebook
       url: "https://www.facebook.com/zach.bishop3"
 
+googleAnalytics: G-SR3S8C2GNE
 
 enableInlineShortcodes: true
 enableRobotsTXT: true
