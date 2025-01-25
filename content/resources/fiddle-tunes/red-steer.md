@@ -3,6 +3,8 @@ hideMeta: true
 title: "Red Steer"
 type: fiddle-tune
 layout: single
+stars: 5
+spiceLevel: 1
 songKeys:
     - 'A'
     - 'G'

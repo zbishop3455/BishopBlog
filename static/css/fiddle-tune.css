@@ -1,21 +1,5 @@
 
 
-.chord-meta-item {
-    display: flex;
-    flex-direction: row;
-    /* justify-items: flex-start; */
-    align-items: center;
-    gap: 10px;
-    margin: 15px 0px;
-}
-
-.song-key {
-    background-color: --var(tertiary);
-    color: var(--content);
-    border: 2px solid var(--border);
-    border-radius: 6px;
-    padding: 0px 8px;
-}
 
 /*  */
 #chart-key-select {
