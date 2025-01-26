@@ -23,7 +23,7 @@ songData:
 
 ---
 ### Notes
-**Bask in the glory of Uncle Bunt Stephens!** This is an absolute classic fiddle tune which teaches players the spirit of the *old-time pulse.* This tune personally unlocked a lot of the old-time bowing patterns in my playing. I use this tune as a wormup and exercise in bowing. Welcome to your first "Hillbilly Trance" song.
+**Bask in the glory of Uncle Bunt Stephens!** This is an absolute classic fiddle tune which teaches players the spirit of the *old-time pulse.* This tune personally unlocked a lot of the old-time bowing patterns in my playing. I use this tune as a warm-up and exercise in bowing. Welcome to your first "Hillbilly Trance" song.
 
 While the structure of the song is just a drone of the root note, it is very possible to sprinkle in IV and V chords where you feel. Do not let the simple structure limit you. Just about anything sounds good on this tune! 
 

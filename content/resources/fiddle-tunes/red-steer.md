@@ -4,7 +4,7 @@ title: "Red Steer"
 type: fiddle-tune
 layout: single
 stars: 5
-spiceLevel: 1
+spiceLevel: 0
 songKeys:
     - 'A'
     - 'G'

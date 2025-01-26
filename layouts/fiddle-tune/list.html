@@ -57,16 +57,17 @@
 <div class = "song-entry-container">
 
 {{- $term := .Data.Term }}
-{{- range $index, $page := $paginator.Pages }}
+
+{{- range $index, $page := sort $paginator.Pages "Title" "asc" }}
 
 {{- $class := "post-entry" }}
 
-{{- $user_preferred := or site.Params.disableSpecial1stPost site.Params.homeInfoParams }}
+<!-- {{- $user_preferred := or site.Params.disableSpecial1stPost site.Params.homeInfoParams }}
 {{- if (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) (not $user_preferred)) }}
 {{- $class = "first-entry" }}
 {{- else if $term }}
 {{- $class = "post-entry tag-entry" }}
-{{- end }}
+{{- end }} -->
 
 <article class="song-entry">
 
