@@ -7,4 +7,4 @@ cover:
     image: "img/me1.JPG"
 ---
 
-For all of my old-time music friends, I have compiles the fiddle tunes I play along with some chord charts!
+Here are my favorite fiddle tunes along with some chord charts.
