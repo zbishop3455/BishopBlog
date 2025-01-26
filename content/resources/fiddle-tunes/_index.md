@@ -2,9 +2,9 @@
 title: "Old-Time Fiddle Tunes"
 type: fiddle-tune
 layout: "list"
-description: "Chord Charts for Old Time Music"
+description: "Chord Charts for Old Time Music (A-Z)"
 cover:
     image: "img/me1.JPG"
 ---
 
-For all of my old-time music friends, I have compiles the fiddle tunes I play along with some chord charts!
+Here are my favorite fiddle tunes along with some chord charts.
