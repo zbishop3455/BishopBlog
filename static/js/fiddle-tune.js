@@ -180,20 +180,53 @@ class Chord {
         // Translate the scale degree to the new key
         var newRoot = keyRoots[this.scaleDegree - 1];
 
+        // Extract the sharp or flat modifier from the new root (+1 note or -1 note)
+        var sharpOrFlatModifier = 0;
+        if (this.sharpOrFlat === "#") {
+            sharpOrFlatModifier = 1;
+        } else if (this.sharpOrFlat === "b") {
+            sharpOrFlatModifier = -1;
+        }
+        
+        // Determine which list of notes to use (sharp or flat)
+        var noteList = allNotesSharp;
+        if (newRoot.includes("b")) {
+            noteList = allNotesFlat;
+        }
+
+        // Find the index of the new root note
+        var idx = noteList.indexOf(newRoot);
+        idx += sharpOrFlatModifier;
+
+        if (idx < 0) { // wrap around
+            idx = noteList.length - 1;
+        } else if (idx >= noteList.length) {
+            idx = 0;
+        }
+
+        newRoot = noteList[idx];
+
         this.chordRoot = newRoot;
     }
 
     getDisplayText() {
 
         if (! this.isTransposed) {
-            return this.chordRoot + "<sup>" + this.chordQuality + "</sup>";
+            var prefix = "";
+            if (this.sharpOrFlat === "#") {
+                prefix = "&#9839;";
+            } else if (this.sharpOrFlat === "b") {
+                prefix = "&#9837;";
+            }
+
+            return prefix + this.chordRoot + "<sup>" + this.chordQuality + "</sup>";
         }
 
-        // Todo: add support for sharp and flat chords
         var s = this.chordRoot;
         if (this.isMinor) {
             s += "m";
         }
+        
         s += "<sup>" + this.chordQuality + "</sup>";
 
         return s;
