@@ -17,7 +17,7 @@ songData:
     b-part:
         name: "Part B"
         lines:
-            line_1: ['IV','IV','I','IV','I','I','iV','iV']
+            line_1: ['IV','IV','I','IV','I','I','vi','vi']
             line_2: ['I','I','I','IV','I','V7','I','I']
 ---
 

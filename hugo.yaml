@@ -1,12 +1,13 @@
 baseURL: https://zacharybishop.com/
-languageCode: en-us
+locale: en-us
 title: Zachary Bishop
-paginate: 5
+pagination:
+  pagerSize: 5
 theme: ["PaperMod"]
 
 menu:
   main:
-    - identifier: categorices
+    - identifier: posts
       name: Posts
       url: /posts/
       weight: 1
@@ -26,7 +27,6 @@ menu:
 params:
   defaultTheme: dark
   disableThemeToggle: false
-  defaultTheme: dark
   # defaultTheme: auto # to switch between dark or light according to browser theme
   description: "Zachary Bishop's person blog"
   keywords: [Blog, Portfolio]

@@ -1,16 +1,19 @@
 
 
-document.addEventListener("DOMContentLoaded", () => {
+// Guarded so this file can also be required by the test suite, where there is no DOM.
+if (typeof document !== "undefined") {
+    document.addEventListener("DOMContentLoaded", () => {
 
-    var songKeyDropdown = document.getElementById("chart-key-select");
+        var songKeyDropdown = document.getElementById("chart-key-select");
 
-    // handle song key change
-    songKeyDropdown.addEventListener("change", function() {
+        // handle song key change
+        songKeyDropdown.addEventListener("change", function() {
+            renderCordChart(songKeyDropdown.value);
+        });
+
         renderCordChart(songKeyDropdown.value);
     });
-
-    renderCordChart(songKeyDropdown.value);
-  });
+}
 
 
 
@@ -122,6 +125,7 @@ class Chord {
 
     constructor(romanNumeralExpr) {
         this.romanNumeralExpr = romanNumeralExpr;
+        this.isValid = true;
 
         // Parse the roman numeral into its components
         this.parseRomanNumeral();
@@ -159,23 +163,31 @@ class Chord {
         this.scaleDegree = romanNumeralMap[this.chordRoot.toUpperCase()];
 
         if (!this.scaleDegree) {
-            alert("Could not map chord to scale degree: " + this.chordRoot);
-            return
+            // Bad chord data should not take the page down. Flag it so the chart
+            // renders the raw token, which makes the typo obvious to the author.
+            this.isValid = false;
+            console.warn("fiddle-tune: could not map chord to a scale degree: " + this.romanNumeralExpr);
+            return;
         }
 
     }
 
     transpose(key) {
-        
-        this.isTransposed = true;
+
+        // Nothing to transpose if we never understood the chord.
+        if (!this.isValid) {
+            return;
+        }
 
         // Transpose from roman numeral to actual chord value
         var keyRoots = keyMap[key];
 
         if (!keyRoots) {
-            alert("Unsupported Key: " + key);
+            console.warn("fiddle-tune: unsupported key: " + key);
             return;
         }
+
+        this.isTransposed = true;
 
         // Translate the scale degree to the new key
         var newRoot = keyRoots[this.scaleDegree - 1];
@@ -194,15 +206,9 @@ class Chord {
             noteList = allNotesFlat;
         }
 
-        // Find the index of the new root note
-        var idx = noteList.indexOf(newRoot);
-        idx += sharpOrFlatModifier;
-
-        if (idx < 0) { // wrap around
-            idx = noteList.length - 1;
-        } else if (idx >= noteList.length) {
-            idx = 0;
-        }
+        // Find the index of the new root note, wrapping around the octave
+        var idx = noteList.indexOf(newRoot) + sharpOrFlatModifier;
+        idx = ((idx % noteList.length) + noteList.length) % noteList.length;
 
         newRoot = noteList[idx];
 
@@ -210,6 +216,13 @@ class Chord {
     }
 
     getDisplayText() {
+
+        // Unparseable chord: show exactly what the markdown said, flagged so the
+        // typo is obvious on the page instead of silently rendering "undefined".
+        if (!this.isValid) {
+            return '<span class="song-chord-invalid" title="Unrecognized chord">'
+                + this.romanNumeralExpr + '</span>';
+        }
 
         if (! this.isTransposed) {
             var prefix = "";
@@ -232,4 +245,9 @@ class Chord {
         return s;
     }
 
+}
+
+// Exported for the test suite. The browser ignores this.
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = { Chord, processSong, keyMap, romanNumeralMap };
 }

@@ -61,3 +61,10 @@
     font-size: 1.5em;
     font-weight: bold;
 }
+
+/* A chord the parser could not understand. Shown raw so the typo is findable. */
+.song-chord-invalid {
+    color: #c0392b;
+    border-bottom: 2px dashed #c0392b;
+    font-weight: bold;
+}
